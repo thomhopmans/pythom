@@ -3,7 +3,6 @@
 Created on April 29, 2015
 @author: thom.hopmans
 """
-__author__ = 'thom.hopmans'
 
 import pandas as pd
 import numpy as np
