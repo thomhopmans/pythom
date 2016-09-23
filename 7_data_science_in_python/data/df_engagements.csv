@@ -1,0 +1,17 @@
+user_id;site_id;engagement_unix_timestamp;engagement_type;custom_properties
+bf4f260b-7c26-4947-924d-f07080843979;596;1473312966;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+bf4f260b-7c26-4947-924d-f07080843979;596;1474398093;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+883773c2-4538-42f8-a739-068727245b96;596;1473809952;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+6c79ab4b-6d7c-40cf-b90e-9b791ef7797c;596;1473698076;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+6c79ab4b-6d7c-40cf-b90e-9b791ef7797c;596;1474509058;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+6c79ab4b-6d7c-40cf-b90e-9b791ef7797c;596;1475284505;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+f61b67b5-4336-42e3-82c8-848c58dee05c;596;1473289490;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+f61b67b5-4336-42e3-82c8-848c58dee05c;596;1473424878;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+f61b67b5-4336-42e3-82c8-848c58dee05c;596;1474115140;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+3b110193-4d74-42b9-9889-0bf0a888263f;596;1473277969;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+3b110193-4d74-42b9-9889-0bf0a888263f;596;1473427226;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+3b110193-4d74-42b9-9889-0bf0a888263f;596;1474293848;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+3b110193-4d74-42b9-9889-0bf0a888263f;596;1475212755;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+e2cb88ee-506b-440d-b3c0-6bfc763ec5bd;596;1473547347;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+8939393b-4373-42ef-a0ec-8bbc792b49ec;596;1473378954;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
+8939393b-4373-42ef-a0ec-8bbc792b49ec;596;1473694048;newsletter_subscription;{'gender': 'male', 'age': 29, 'country': 'Netherlands'}
