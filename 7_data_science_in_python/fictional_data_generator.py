@@ -3,21 +3,21 @@
 Created on September 22, 2016
 @author: thom.hopmans
 """
-
 import logging
 import uuid
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
-from util import parse_datetime_as_unixtstamp
+from tqdm import *
+from common.base import parse_datetime_as_unixtstamp
 
 logging.basicConfig(level=logging.DEBUG)
 
-N_USERS = 10
+N_USERS = 5000
 DATE_START = datetime(2016, 9, 1)
 
 
-class FictionalDataGenerator:
+class FictionalDataGenerator(object):
     """
     Create a fictional session and engagements dataset for the Python Data Science crash course.
 
@@ -31,6 +31,8 @@ class FictionalDataGenerator:
         self.df_engagements = None
         self.engagements_mean = 20
         self.engagements_stdev = 8
+        self.path_output_sessions = 'data\\df_sessions.csv'
+        self.path_output_engagements = 'data\\df_engagements.csv'
 
     def run(self):
         """ Run the full script """
@@ -54,16 +56,20 @@ class FictionalDataGenerator:
         self.df_engagements = self.df_engagements[relevant_columns]
 
     def save_dataframes(self):
-        self.df.set_index('user_id').to_csv('data\\df.csv', sep=',')
-        self.df_sessions.set_index('user_id').to_csv('data\\df_sessions.csv', sep=',')
-        self.df_engagements.set_index('user_id').to_csv('data\\df_engagements.csv', sep=';')
+        # self.df.set_index('user_id').to_csv('data\\df.csv', sep=',')
+        self.df_sessions.set_index('user_id').to_csv(self.path_output_sessions, sep=',')
+        self.df_engagements.set_index('user_id').to_csv(self.path_output_engagements, sep=';')
 
     def fill_dataframe_with_random_users_and_sessions(self):
-        for i in xrange(N_USERS):
+        user_dataframes = []
+        for i in tqdm(xrange(N_USERS)):
             user_id = str(uuid.uuid4())
-            self.generate_random_sessions_per_user(user_id)
+            df = self.generate_random_sessions_per_user(user_id)
+            user_dataframes.append(df)
+        self.df = pd.concat(user_dataframes)
 
     def generate_random_sessions_per_user(self, uid):
+        df = pd.DataFrame()
         n_sessions = int(np.ceil(np.random.rand(1) * 10))
         session_start_date = DATE_START
         sum_pageviews = 0
@@ -104,7 +110,8 @@ class FictionalDataGenerator:
 
             # Append session row to total DataFrame
             df_row = pd.DataFrame(session_dict, index=[0])
-            self.df = self.df.append(df_row, ignore_index=True)
+            df = df.append(df_row, ignore_index=True)
+        return df
 
     def has_engagement_in_session(self, pageviews):
         critical_value = np.random.normal(self.engagements_mean, self.engagements_stdev)

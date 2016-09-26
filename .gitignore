@@ -64,5 +64,8 @@ target/
 # Archive
 _archive/
 
+# PyCharm
+.idea/
+
 # R
 .Rhistory
