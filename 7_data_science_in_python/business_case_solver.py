@@ -81,7 +81,6 @@ class BusinessCaseSolver(object):
     def add_pageviews_cumsum(self):
         # Add cumulative sum of pageviews
         self.df['pageviews_cumsum'] = self.df.groupby('user_id')['pageviews'].cumsum()
-        print self.df.head(5)
 
     def run_logistic_regression(self):
         # Logistic regression
@@ -96,18 +95,26 @@ class BusinessCaseSolver(object):
         # Predict the conversion probability for 0 up till 50 pageviews
         X = sm.add_constant(range(0, 50))
         y_hat = self.logistic_regression_results.predict(X)
-        df_hat = pd.DataFrame(zip(X, y_hat))
+        df_hat = pd.DataFrame(zip(X[:, 1], y_hat))
         df_hat.columns = ['X', 'y_hat']
-        print df_hat
+        print ""
+        print "For example, the probability of converting after 25 pageviews is {}".format(df_hat.ix[25]['y_hat'])
 
     def visualize_results(self):
         # Visualize logistic curve using seaborn
+        sns.set(style="darkgrid")
         sns.regplot(x="pageviews_cumsum",
                     y="is_conversion",
                     data=self.df,
                     logistic=True,
                     n_boot=500,
-                    y_jitter=.01)
+                    y_jitter=.01,
+                    scatter_kws={"s": 60})
+        sns.set(font_scale=1.3)
+        sns.plt.title('Logistic Regression Curve')
+        sns.plt.ylabel('Conversion probability')
+        sns.plt.xlabel('Cumulative sum of pageviews')
+        sns.plt.subplots_adjust(right=0.93, top=0.90, left=0.10, bottom=0.10)
         sns.plt.show()
 
 if __name__ == "__main__":
