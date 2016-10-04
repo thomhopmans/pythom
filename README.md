@@ -10,4 +10,5 @@ A summary of my articles:
 * [3: Slashception with regexp_extract in Hive](https://www.themarketingtechnologist.co/slashception-with-regexp_extract-in-hive/)
 * [4: A recommendation system for blogs: Setting up the prerequisites (part 1)](https://www.themarketingtechnologist.co/building-a-recommendation-engine-for-geek-setting-up-the-prerequisites-13/)
 * [5: A recommendation system for blogs: Content-based similarity (part 2)](https://www.themarketingtechnologist.co/building-a-recommendation-engine-for-geek-setting-up-the-prerequisites-13/)
-* [6: Upload your local Spark script to an AWS EMR cluster using a simple Python script]()
+* [6: Upload your local Spark script to an AWS EMR cluster using a simple Python script](https://www.themarketingtechnologist.co/upload-your-local-spark-script-to-an-aws-emr-cluster-using-a-simply-python-script/)
+* [7: Helping our new Data Scientists start in Python: A guide to learning by doing](https://www.themarketingtechnologist.co/helping-our-new-data-scientists-start-in-python-a-guide-to-learning-by-doing/)
