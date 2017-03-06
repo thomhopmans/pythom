@@ -115,8 +115,9 @@ def predict_probabilities(logistic_regression_results):
     y_hat = logistic_regression_results.predict(X)
     df_hat = pd.DataFrame(zip(X[:, 1], y_hat))
     df_hat.columns = ['X', 'y_hat']
+    p_conversion_25_pageviews = df_hat.ix[25]['y_hat']
     print("")
-    print("For example, the probability of converting after 25 pageviews is {}".format(df_hat.ix[25]['y_hat']))
+    print("The probability of converting after 25 pageviews is {}".format(p_conversion_25_pageviews))
 
 
 def visualize_results(df):
