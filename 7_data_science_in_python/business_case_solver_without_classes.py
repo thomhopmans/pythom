@@ -10,11 +10,7 @@ Created on September 22, 2016
 import pandas as pd
 import statsmodels.api as sm
 import seaborn as sns
-from common.base import parse_unixtstamp_as_datetime
-
-
-path_input_sessions = 'data\\df_sessions.csv'
-path_input_engagements = 'data\\df_engagements.csv'
+from datetime import datetime
 
 
 def run():
@@ -22,12 +18,15 @@ def run():
     # Load data
     df_sessions = read_sessions_data()
     df_engagements = read_engagements_data()
+    print(df_sessions.head())
+    print(df_engagements.head())
     # Transform data
     df_engagements = filter_for_first_engagements(df_engagements)
     df = merge_dataframes_on_user_id(df_sessions, df_engagements)
     df = remove_sessions_after_first_engagement(df)
     df = add_conversion_metric(df)
     df = add_pageviews_cumsum(df)
+    df.to_csv('output\\df_transformed.csv')
     # Fit model using logistic regression
     logistic_regression_results = run_logistic_regression(df)
     predict_probabilities(logistic_regression_results)
@@ -37,7 +36,7 @@ def run():
 
 def read_sessions_data():
     # Read sessions data
-    df_sessions = pd.read_csv(filepath_or_buffer=path_input_sessions,
+    df_sessions = pd.read_csv(filepath_or_buffer='data\\df_sessions.csv',
                               parse_dates={'datetime': [2]})
     relevant_columns = ['datetime', 'user_id', 'session_number', 'pageviews']
     df_sessions = df_sessions[relevant_columns]
@@ -46,13 +45,18 @@ def read_sessions_data():
 
 def read_engagements_data():
     # Read engagements data
-    df_engagements = pd.read_csv(filepath_or_buffer=path_input_engagements,
+    df_engagements = pd.read_csv(filepath_or_buffer='data\\df_engagements.csv',
                                  sep=';',
                                  parse_dates={'datetime': [2]},
                                  date_parser=parse_unixtstamp_as_datetime)
     relevant_columns = ['datetime', 'user_id']
     df_engagements = df_engagements[relevant_columns]
     return df_engagements
+
+
+def parse_unixtstamp_as_datetime(unix_tstamp):
+    datetime_obj = datetime.fromtimestamp(int(unix_tstamp))
+    return datetime_obj
 
 
 def filter_for_first_engagements(df_engagements):
