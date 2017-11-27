@@ -100,19 +100,6 @@ class SlackNotifier(object):
         response = self._send_post_request(data, headers)
         self._log_response_status(response)
 
-    def _send_post_request(self, body, headers):
-        https_connection = self._get_https_connection_with_slack()
-        https_connection.request('POST', self.slack_webhook_urlpath, body, headers)
-        response = https_connection.getresponse()
-        return response
-
-    def _log_response_status(self, response):
-        if response.status == 200:
-            self.logger.info("Succesfully send message to Slack.")
-        else:
-            self.logger.critical("Send message to Slack failed with "
-                                 "status code '{}' and reason '{}'.".format(response.status, response.reason))
-
     def _get_payload(self, username, icon, message):
         payload_dict = {
             'channel': self.channel,
@@ -141,14 +128,27 @@ class SlackNotifier(object):
         return data
 
     @staticmethod
+    def _get_headers():
+        headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
+        return headers
+
+    def _send_post_request(self, body, headers):
+        https_connection = self._get_https_connection_with_slack()
+        https_connection.request('POST', self.slack_webhook_urlpath, body, headers)
+        response = https_connection.getresponse()
+        return response
+
+    @staticmethod
     def _get_https_connection_with_slack():
         h = http.client.HTTPSConnection('hooks.slack.com')
         return h
 
-    @staticmethod
-    def _get_headers():
-        headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
-        return headers
+    def _log_response_status(self, response):
+        if response.status == 200:
+            self.logger.info("Succesfully send message to Slack.")
+        else:
+            self.logger.critical("Send message to Slack failed with "
+                                 "status code '{}' and reason '{}'.".format(response.status, response.reason))
 
 
 def lambda_handler(event, context):
