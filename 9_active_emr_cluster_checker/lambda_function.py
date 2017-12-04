@@ -87,7 +87,7 @@ class ActiveEMRClusterChecker(object):
         slack_notifier.send_message(message, icon, username)
 
     def _terminate_active_clusters(self):
-        response = self.emr_client.terminate_job_flows(
+        self.emr_client.terminate_job_flows(
             JobFlowIds=self.active_cluster_ids
         )
         self.logger.info("Terminated all active clusters...")
