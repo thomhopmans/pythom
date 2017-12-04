@@ -23,6 +23,7 @@ class ActiveEMRClusterChecker(object):
         self._list_active_clusters()
         self._log_number_of_active_clusters()
         self._send_slack_notification_for_each_active_cluster()
+        self._terminate_active_clusters()
 
     def _set_emr_client(self):
         session = boto3.Session()
@@ -30,8 +31,8 @@ class ActiveEMRClusterChecker(object):
 
     def _list_active_clusters(self):
         active_cluster_states = ['STARTING', 'BOOTSTRAPPING', 'RUNNING', 'WAITING']
-        active_clusters = self.emr_client.list_clusters(ClusterStates=active_cluster_states)
-        self.active_cluster_ids = [cluster["Id"] for cluster in active_clusters["Clusters"]]
+        response = self.emr_client.list_clusters(ClusterStates=active_cluster_states)
+        self.active_cluster_ids = [cluster["Id"] for cluster in response["Clusters"]]
 
     def _log_number_of_active_clusters(self):
         if not self.active_cluster_ids:
@@ -85,6 +86,12 @@ class ActiveEMRClusterChecker(object):
         slack_notifier = SlackNotifier()
         slack_notifier.send_message(message, icon, username)
 
+    def _terminate_active_clusters(self):
+        response = self.emr_client.terminate_job_flows(
+            JobFlowIds=self.active_cluster_ids
+        )
+        self.logger.info("Terminated all active clusters...")
+
 
 class SlackNotifier(object):
     logger = _logger
@@ -99,19 +106,6 @@ class SlackNotifier(object):
         headers = self._get_headers()
         response = self._send_post_request(data, headers)
         self._log_response_status(response)
-
-    def _send_post_request(self, body, headers):
-        https_connection = self._get_https_connection_with_slack()
-        https_connection.request('POST', self.slack_webhook_urlpath, body, headers)
-        response = https_connection.getresponse()
-        return response
-
-    def _log_response_status(self, response):
-        if response.status == 200:
-            self.logger.info("Succesfully send message to Slack.")
-        else:
-            self.logger.critical("Send message to Slack failed with "
-                                 "status code '{}' and reason '{}'.".format(response.status, response.reason))
 
     def _get_payload(self, username, icon, message):
         payload_dict = {
@@ -141,14 +135,27 @@ class SlackNotifier(object):
         return data
 
     @staticmethod
+    def _get_headers():
+        headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
+        return headers
+
+    def _send_post_request(self, body, headers):
+        https_connection = self._get_https_connection_with_slack()
+        https_connection.request('POST', self.slack_webhook_urlpath, body, headers)
+        response = https_connection.getresponse()
+        return response
+
+    @staticmethod
     def _get_https_connection_with_slack():
         h = http.client.HTTPSConnection('hooks.slack.com')
         return h
 
-    @staticmethod
-    def _get_headers():
-        headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
-        return headers
+    def _log_response_status(self, response):
+        if response.status == 200:
+            self.logger.info("Succesfully send message to Slack.")
+        else:
+            self.logger.critical("Send message to Slack failed with "
+                                 "status code '{}' and reason '{}'.".format(response.status, response.reason))
 
 
 def lambda_handler(event, context):
