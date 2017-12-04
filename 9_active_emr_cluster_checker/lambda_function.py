@@ -23,6 +23,7 @@ class ActiveEMRClusterChecker(object):
         self._list_active_clusters()
         self._log_number_of_active_clusters()
         self._send_slack_notification_for_each_active_cluster()
+        self._terminate_active_clusters()
 
     def _set_emr_client(self):
         session = boto3.Session()
@@ -30,8 +31,8 @@ class ActiveEMRClusterChecker(object):
 
     def _list_active_clusters(self):
         active_cluster_states = ['STARTING', 'BOOTSTRAPPING', 'RUNNING', 'WAITING']
-        active_clusters = self.emr_client.list_clusters(ClusterStates=active_cluster_states)
-        self.active_cluster_ids = [cluster["Id"] for cluster in active_clusters["Clusters"]]
+        response = self.emr_client.list_clusters(ClusterStates=active_cluster_states)
+        self.active_cluster_ids = [cluster["Id"] for cluster in response["Clusters"]]
 
     def _log_number_of_active_clusters(self):
         if not self.active_cluster_ids:
@@ -84,6 +85,12 @@ class ActiveEMRClusterChecker(object):
     def _send_slack_notification(message, icon, username):
         slack_notifier = SlackNotifier()
         slack_notifier.send_message(message, icon, username)
+
+    def _terminate_active_clusters(self):
+        response = self.emr_client.terminate_job_flows(
+            JobFlowIds=self.active_cluster_ids
+        )
+        self.logger.info("Terminated all active clusters...")
 
 
 class SlackNotifier(object):
