@@ -223,7 +223,7 @@ class DeployPySparkScriptOnAws(object):
                         'Jar': 'command-runner.jar',
                         'Args': [
                             "spark-submit",
-                            "/home/hadoop/run.py",
+                            "/home/hadoop/wordcount.py",
                             arguments
                         ]
                     }
