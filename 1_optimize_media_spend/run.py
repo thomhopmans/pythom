@@ -1,19 +1,13 @@
-# encoding: utf-8
-"""
-Created on April 29, 2015
-@author: thom.hopmans
-"""
-
-import pandas as pd
-import numpy as np
+import matplotlib.dates as dates
 import matplotlib.pyplot as plt
+import matplotlib.ticker as tkr
+import numpy as np
+import pandas as pd
 import statsmodels.formula.api as sm
 import statsmodels.tools.tools as sm_tools
-import matplotlib.dates as dates
-import matplotlib.ticker as tkr
 
 
-class ExampleSCurves(object):
+class ExampleSCurves:
     """
     A practical example that shows how to optimize your media spend using S-curves
     """
@@ -50,7 +44,7 @@ class ExampleSCurves(object):
         # Add day of week dummies
         self.add_day_dummies()
         # Uncomment the line below if you want to save your fictional dataset
-        # self.df.to_csv('dataset.csv')
+        self.df.to_csv('dataset.csv')
 
     def load_fictional_dataset_from_article(self):
         # Load earlier created fictional dataset

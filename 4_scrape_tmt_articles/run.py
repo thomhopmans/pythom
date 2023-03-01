@@ -1,10 +1,5 @@
-# encoding: utf-8
-"""
-Created on November 10, 2015
-@author: thom.hopmans
-"""
+import urllib
 
-import urllib2
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -38,9 +33,9 @@ class ScrapeTMTArticles:
         while pagination_older_posts_link is not None:
             # Load content from URL
             page_url = self.URL_HOST + self.url_path
-            content = urllib2.urlopen(page_url).read()
+            content = urllib.urlopen(page_url).read()
             soup = BeautifulSoup(content)
-            print("Extracting articles from {0}.".format(page_url))
+            print(f"Extracting articles from {page_url}.")
             # Find all articles on page
             articles = soup.find_all("article", {"class": "post"})
             # Extract from each article on the page specific values such as the title, author, tags and link.
@@ -52,7 +47,7 @@ class ScrapeTMTArticles:
             if pagination_older_posts_link is not None:
                 self.url_path = pagination_older_posts_link
         # Output number of blog posts
-        print("Number of blog post articles: {0}".format(len(self.articles_df)))
+        print(f"Number of blog post articles: {len(self.articles_df)}")
 
     def extract_article_metrics(self, article):
         """
@@ -94,19 +89,23 @@ class ScrapeTMTArticles:
         # Initialize Firefox browser for loading the blog posts. Note that we now switch to Selenium because we need
         # JavaScript to be executed on the page first to load the content.
         driver = webdriver.Firefox()
+
         # Iterate over all articles in the dataframe
         for index, row in self.articles_df.iterrows():
             # Load URL of blog post
             self.url_path = self.URL_HOST + row['link']
-            print("Extracting article from {0}.".format(self.url_path))
+            print(f"Extracting article from {self.url_path}.")
+
             # Find post section on page
             driver.get(self.url_path)
             post_content_element = driver.find_element_by_class_name('post-content')
             article_content_html = post_content_element.get_attribute('innerHTML')
             article_content_text = post_content_element.text
+
             # Set content in articles dataframe
             self.articles_df.set_value(index, "content_html", article_content_html)
             self.articles_df.set_value(index, "content_text", article_content_text)
+
         # Close browser windows
         driver.quit()
 

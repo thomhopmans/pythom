@@ -1,14 +1,9 @@
-# encoding: utf-8
-"""
-Created on April 6, 2016
-@author: thom.hopmans
-"""
-
 import logging
 import os
-from datetime import datetime
-import time
 import tarfile
+import time
+from datetime import datetime
+
 import boto3
 import botocore
 
@@ -32,7 +27,7 @@ def terminate(error_message=None):
     exit()
 
 
-class DeployPySparkScriptOnAws(object):
+class DeployPySparkScriptOnAws:
     """
     Programmatically deploy a local PySpark script on an AWS cluster
     """
@@ -114,7 +109,7 @@ class DeployPySparkScriptOnAws(object):
         # Compressed Python script files (tar.gz)
         s3.Object(self.s3_bucket_temp_files, self.job_name + '/script.tar.gz')\
           .put(Body=open('files/script.tar.gz', 'rb'), ContentType='application/x-tar')
-        logger.info("Uploaded files to key '{}' in bucket '{}'".format(self.job_name, self.s3_bucket_temp_files))
+        logger.info(f"Uploaded files to key '{self.job_name}' in bucket '{self.s3_bucket_temp_files}'")
         return True
 
     def remove_temp_files(self, s3):
@@ -127,7 +122,7 @@ class DeployPySparkScriptOnAws(object):
         for key in bucket.objects.all():
             if key.key.startswith(self.job_name) is True:
                 key.delete()
-                logger.info("Removed '{}' from bucket for temporary files".format(key.key))
+                logger.info(f"Removed '{key.key}' from bucket for temporary files")
 
     def start_spark_cluster(self, c):
         """
@@ -137,7 +132,7 @@ class DeployPySparkScriptOnAws(object):
         """
         response = c.run_job_flow(
             Name=self.job_name,
-            LogUri="s3://{}/elasticmapreduce/".format(self.s3_bucket_logs),
+            LogUri=f"s3://{self.s3_bucket_logs}/elasticmapreduce/",
             ReleaseLabel="emr-4.4.0",
             Instances={
                 'InstanceGroups': [
@@ -169,16 +164,16 @@ class DeployPySparkScriptOnAws(object):
                 {
                     'Name': 'setup',
                     'ScriptBootstrapAction': {
-                        'Path': 's3n://{}/{}/setup.sh'.format(self.s3_bucket_temp_files, self.job_name),
+                        'Path': f's3n://{self.s3_bucket_temp_files}/{self.job_name}/setup.sh'.format(),
                         'Args': [
-                            's3://{}/{}'.format(self.s3_bucket_temp_files, self.job_name),
+                            f's3://{self.s3_bucket_temp_files}/{ self.job_name}',
                         ]
                     }
                 },
                 {
                     'Name': 'idle timeout',
                     'ScriptBootstrapAction': {
-                        'Path':'s3n://{}/{}/terminate_idle_cluster.sh'.format(self.s3_bucket_temp_files, self.job_name),
+                        'Path': f's3n://{self.s3_bucket_temp_files}/{self.job_name}/terminate_idle_cluster.sh',
                         'Args': ['3600', '300']
                     }
                 },
@@ -189,9 +184,9 @@ class DeployPySparkScriptOnAws(object):
         if response['ResponseMetadata']['HTTPStatusCode'] == 200:
             self.job_flow_id = response['JobFlowId']
         else:
-            terminate("Could not create EMR cluster (status code {})".format(response_code))
+            terminate(f"Could not create EMR cluster (status code {response_code})")
 
-        logger.info("Created Spark EMR-4.4.0 cluster with JobFlowId {}".format(self.job_flow_id))
+        logger.info(f"Created Spark EMR-4.4.0 cluster with JobFlowId {self.job_flow_id}")
 
     def describe_status_until_terminated(self, c):
         """
@@ -213,7 +208,7 @@ class DeployPySparkScriptOnAws(object):
         :param c:
         :return:
         """
-        response = c.add_job_flow_steps(
+        c.add_job_flow_steps(
             JobFlowId=self.job_flow_id,
             Steps=[
                 {
@@ -230,7 +225,7 @@ class DeployPySparkScriptOnAws(object):
                 },
             ]
         )
-        logger.info("Added step 'spark-submit' with argument '{}'".format(arguments))
+        logger.info(f"Added step 'spark-submit' with argument '{arguments}'")
         time.sleep(1)  # Prevent ThrottlingException
 
     def step_copy_data_between_s3_and_hdfs(self, c, src, dest):
@@ -239,7 +234,7 @@ class DeployPySparkScriptOnAws(object):
         :param c:
         :return:
         """
-        response = c.add_job_flow_steps(
+        c.add_job_flow_steps(
             JobFlowId=self.job_flow_id,
             Steps=[{
                     'Name': 'Copy data from S3 to HDFS',
@@ -249,13 +244,13 @@ class DeployPySparkScriptOnAws(object):
                         'Args': [
                             "s3-dist-cp",
                             "--s3Endpoint=s3-eu-west-1.amazonaws.com",
-                            "--src={}".format(src),
-                            "--dest={}".format(dest)
+                            f"--src={src}",
+                            f"--dest={dest}"
                         ]
                     }
                 }]
         )
-        logger.info("Added step 'Copy data from {} to {}'".format(src, dest))
+        logger.info(f"Added step 'Copy data from {src} to {dest}'")
 
 
 logger = setup_logging()

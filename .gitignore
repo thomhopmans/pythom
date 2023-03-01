@@ -64,8 +64,9 @@ target/
 # Archive
 _archive/
 
-# PyCharm
+# Envs
 .idea/
+.venv
 
 # R
 .Rhistory

@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "themarketingtechnologist"
+version = "0.0.1"
+description = "A bundle of scripts related to marketing technology"
+authors = ["Thom Hopmans"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+matplotlib = ">=3.6.0"
+pandas = ">=1.1.0"
+numpy = ">=1.19.0"
+scikit-learn = ">=1.1.0"
+tqdm = ">=4.64.1"
+statsmodels = "^0.13.5"
+selenium = "^4.8.2"
+nltk = "^3.8.1"
+boto3 = "^1.26.81"
+seaborn = "^0.12.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.3"
+pytest = "^6.2"
+pytest-cov = "^2.12.1"
+ruff = "^0.0.227"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+select = ["I", "E", "F", "UP"]

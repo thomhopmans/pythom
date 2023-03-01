@@ -1,7 +1,8 @@
-import logging
 import http.client
-import urllib.parse
 import json
+import logging
+import urllib.parse
+
 import boto3
 
 _logger = logging.getLogger()
@@ -11,7 +12,7 @@ SLACK_WEBHOOK_URLPATH = "https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XX
 SLACK_NOTIFICATION_CHANNEL = "@thom"  # prefix @ for users, # for groups
 
 
-class ActiveEMRClusterChecker(object):
+class ActiveEMRClusterChecker:
     logger = _logger
 
     def __init__(self):
@@ -38,7 +39,7 @@ class ActiveEMRClusterChecker(object):
         if not self.active_cluster_ids:
             self.logger.info("No active clusters...")
         else:
-            self.logger.info("Found {} active clusters...".format(len(self.active_cluster_ids)))
+            self.logger.info(f"Found {len(self.active_cluster_ids)} active clusters...")
 
     def _send_slack_notification_for_each_active_cluster(self):
         for cluster_id in self.active_cluster_ids:
@@ -62,7 +63,7 @@ class ActiveEMRClusterChecker(object):
     def _get_slack_message_from_description(self, description):
         message = "Cluster `{name}` was still active in state `{state}` with keypair `{keypair}`. " \
                   .format(state=description['state'], name=description['name'], keypair=description['keypair'])
-        self.logger.info("Message: {}".format(message))
+        self.logger.info(f"Message: {message}")
         return message
 
     def _get_icon_emoji_based_on_description(self, description):
@@ -74,7 +75,7 @@ class ActiveEMRClusterChecker(object):
 
     def _get_username(self, description):
         keypair = self._get_keypair(description)
-        username = "Active EMR Cluster Bot ({})".format(keypair)
+        username = f"Active EMR Cluster Bot ({keypair})"
         return username
 
     @staticmethod
@@ -93,7 +94,7 @@ class ActiveEMRClusterChecker(object):
         self.logger.info("Terminated all active clusters...")
 
 
-class SlackNotifier(object):
+class SlackNotifier:
     logger = _logger
 
     def __init__(self):

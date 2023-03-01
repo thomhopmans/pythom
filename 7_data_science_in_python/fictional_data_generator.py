@@ -1,15 +1,11 @@
-# encoding: utf-8
-"""
-Created on September 22, 2016
-@author: thom.hopmans
-"""
 import logging
+import time
 import uuid
 from datetime import datetime, timedelta
-import pandas as pd
+
 import numpy as np
-from tqdm import *
-from common.base import parse_datetime_as_unixtstamp
+import pandas as pd
+from tqdm import tqdm
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -17,7 +13,12 @@ N_USERS = 5000
 DATE_START = datetime(2016, 9, 1)
 
 
-class FictionalDataGenerator(object):
+def parse_datetime_as_unixtstamp(datetime_obj):
+    unix_tstamp = str(int(time.mktime(datetime_obj.timetuple())))
+    return unix_tstamp
+
+
+class FictionalDataGenerator:
     """
     Create a fictional session and engagements dataset for the Python Data Science crash course.
 
@@ -62,7 +63,7 @@ class FictionalDataGenerator(object):
 
     def fill_dataframe_with_random_users_and_sessions(self):
         user_dataframes = []
-        for i in tqdm(xrange(N_USERS)):
+        for i in tqdm(range(N_USERS)):
             user_id = str(uuid.uuid4())
             df = self.generate_random_sessions_per_user(user_id)
             user_dataframes.append(df)

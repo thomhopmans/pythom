@@ -1,15 +1,17 @@
-# encoding: utf-8
-"""
-Created on September 22, 2016
-@author: thom.hopmans
-"""
+from datetime import datetime
+
 import pandas as pd
-import statsmodels.api as sm
 import seaborn as sns
-from common.base import parse_unixtstamp_as_datetime
+import statsmodels.api as sm
 
 
-class BusinessCaseSolver(object):
+def parse_unixtstamp_as_datetime(unix_tstamp):
+    datetime_obj = datetime.fromtimestamp(int(unix_tstamp))  # .strftime('%Y-%m-%d %H:%M:%S')
+    return datetime_obj
+
+
+
+class BusinessCaseSolver:
     """
     This code solves the fiction business problem as described in the blog on The Marketing Technologist. This is done
     by loading the data, cleaning the data, applying conversion logic, running a logistic regression on the cleaned
@@ -89,7 +91,7 @@ class BusinessCaseSolver(object):
         y = self.df['is_conversion']
         logit = sm.Logit(y, X)
         self.logistic_regression_results = logit.fit()
-        print self.logistic_regression_results.summary()
+        print(self.logistic_regression_results.summary())
 
     def predict_probabilities(self):
         # Predict the conversion probability for 0 up till 50 pageviews
@@ -97,8 +99,8 @@ class BusinessCaseSolver(object):
         y_hat = self.logistic_regression_results.predict(X)
         df_hat = pd.DataFrame(zip(X[:, 1], y_hat))
         df_hat.columns = ['X', 'y_hat']
-        print ""
-        print "For example, the probability of converting after 25 pageviews is {}".format(df_hat.ix[25]['y_hat'])
+        print("")
+        print("For example, the probability of converting after 25 pageviews is {}".format(df_hat.ix[25]['y_hat']))
 
     def visualize_results(self):
         # Visualize logistic curve using seaborn

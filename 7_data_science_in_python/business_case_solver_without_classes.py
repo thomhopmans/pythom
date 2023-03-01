@@ -1,16 +1,13 @@
-# encoding: utf-8
 """
 This code solves the fiction business problem as described in the blog on The Marketing Technologist. This is done
 by loading the data, cleaning the data, applying conversion logic, running a logistic regression on the cleaned
 data and finally, visualizing the results.
-
-Created on September 22, 2016
-@author: thom.hopmans
 """
-import pandas as pd
-import statsmodels.api as sm
-import seaborn as sns
 from datetime import datetime
+
+import pandas as pd
+import seaborn as sns
+import statsmodels.api as sm
 
 
 def run():
@@ -117,7 +114,7 @@ def predict_probabilities(logistic_regression_results):
     df_hat.columns = ['X', 'y_hat']
     p_conversion_25_pageviews = df_hat.ix[25]['y_hat']
     print("")
-    print("The probability of converting after 25 pageviews is {}".format(p_conversion_25_pageviews))
+    print(f"The probability of converting after 25 pageviews is {p_conversion_25_pageviews}")
 
 
 def visualize_results(df):
@@ -138,5 +135,6 @@ def visualize_results(df):
     sns.plt.show()
 
 
-# Run the final program
-run()
+if __name__ == "__main__":
+    # Run the final program
+    run()
