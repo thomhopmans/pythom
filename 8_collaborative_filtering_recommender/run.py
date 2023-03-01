@@ -1,9 +1,5 @@
-import logging
-
 from data_processor import DataProcessor
 from model_fitter import ModelFitter
-
-logging.basicConfig(level=logging.DEBUG)
 
 
 class CollaborativeFiltering:

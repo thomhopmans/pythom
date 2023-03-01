@@ -17,6 +17,7 @@ selenium = "^4.8.2"
 nltk = "^3.8.1"
 boto3 = "^1.26.81"
 seaborn = "^0.12.2"
+beautifulsoup4 = "^4.11.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.3"

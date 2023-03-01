@@ -1,7 +1,9 @@
 import logging
 import math
+import pathlib
 import re
 
+import matplotlib.pyplot as plt
 import nltk
 import numpy as np
 import pandas as pd
@@ -11,8 +13,10 @@ from nltk.stem.snowball import SnowballStemmer
 from sklearn import decomposition
 from sklearn.feature_extraction import text
 
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+sns.set()
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
+CURRENT_DIRECTORY = pathlib.Path(__file__).resolve().parents[0]
 
 class AnalyzeTMTArticles:
 
@@ -55,8 +59,8 @@ class AnalyzeTMTArticles:
         www.themarketingtechnologist.co/building-a-recommendation-engine-for-geek-setting-up-the-prerequisites-13/
         :return: DataFrame with the title, content, tags and author of all TMT articles
         """
-        self.df = pd.read_csv('articles.csv', encoding='utf-8')         # Load articles in a DataFrame
-        self.df = self.df[['title', 'content_text', 'tags', 'author']]  # Slice to remove redundant columns
+        self.df = pd.read_csv(CURRENT_DIRECTORY / 'articles.csv', encoding='utf-8')  # Load articles in a DataFrame
+        self.df = self.df[['title', 'content_text', 'tags']]  # Slice to remove redundant columns
         logging.debug(f"Number of articles: {len(self.df)}\n")
 
     def assign_tags(self):
@@ -82,7 +86,7 @@ class AnalyzeTMTArticles:
         self.vectorize_title()    # Add title as dummies
         self.vectorize_content()  # Add content as dummies
         self.vectorize_tags()     # Add title as dummies
-        # Concatenate all article vectors, i.e. title, content, tags and author
+        # Concatenate all article vectors, i.e. title, content and tags
         article_metrics = (self.X_title, self.X_content, self.X_tags)
         self.X = np.concatenate(article_metrics, axis=1)
         logging.debug(f"Number of features in total DataFrame: {self.X.shape[1]}")
@@ -97,6 +101,7 @@ class AnalyzeTMTArticles:
         """
         vectorizer = text.CountVectorizer(ngram_range=ngram_range,
                                           tokenizer=self.tokenize,
+                                          token_pattern=None,
                                           min_df=min_df,
                                           max_df=max_df,
                                           binary=True,
@@ -156,20 +161,21 @@ class AnalyzeTMTArticles:
         Vectorize the tags of all TMT articles.
         """
         # Define vectorizer and apply on content to obtain an M x N array
-        n_tags = 0
         df_tags = pd.DataFrame(index=self.df.index)
-        for index, row in self.df.iterrows():
+
+        all_tags = []
+        for _, row in self.df.iterrows():
             if row['tags'] != '':
-                values = row['tags'].split(", ")
-                for value in values:
-                    if value not in df_tags.columns:
-                        df_tags[value] = 0.0
-                        n_tags += 1
-                    df_tags.ix[index, value] = 1.0
+                values = set(row['tags'].split(", "))
+                all_tags.append({value: 1 for value in values})
+            else:
+                all_tags.append({})
+        df_tags = pd.DataFrame(all_tags).fillna(0)
+        df_tags.index = self.df.index
 
         # Convert to DataFrame
         self.X_tags = np.array(df_tags, dtype=float)
-        logging.debug(f"Number of features in tags: {n_tags}")
+        logging.debug(f"Number of features in tags: {self.X_tags.shape[1]}")
 
         # Reduce dimensionality of tags features
         self.X_tags = self.reduce_dimensionality(self.X_tags, n_features=self.n_features_tags)
@@ -207,7 +213,6 @@ class AnalyzeTMTArticles:
         """
         df_article_vectors = pd.DataFrame(None)
         df_article_vectors['tags_first'] = self.df['tags_first']
-        df_article_vectors['author'] = self.df['author']
         df_article_vectors['title'] = self.df['title']
         df_article_vectors['numbers'] = range(0, len(df_article_vectors))
         df_article_vectors['coordinates'] = df_article_vectors['numbers'].apply(lambda index: X[index, :])
@@ -240,8 +245,8 @@ class AnalyzeTMTArticles:
         markers_list = [markers_choice_list[i % 8] for i in range(n_tags_first)]
 
         # Create scatter plot
-        sns.lmplot("X coordinate",
-                   "Y coordinate",
+        sns.lmplot(x="X coordinate",
+                   y="Y coordinate",
                    hue="tags_first",
                    data=df,
                    fit_reg=False,
@@ -249,12 +254,11 @@ class AnalyzeTMTArticles:
                    scatter_kws={"s": 150})
 
         # Adjust borders and add title
-        sns.set(font_scale=2)
-        sns.plt.title('Visualization of TMT articles in a 2-dimensional space')
-        sns.plt.subplots_adjust(right=0.80, top=0.90, left=0.12, bottom=0.12)
+        plt.title('Visualization of TMT articles in a 2-dimensional space')
+        plt.subplots_adjust(right=0.80, top=0.90, left=0.12, bottom=0.12)
 
         # Show plot
-        sns.plt.show()
+        plt.show()
 
     def find_similar_articles(self):
         """
@@ -304,7 +308,8 @@ class AnalyzeTMTArticles:
                 # Find corresponding title and set it as most similar article i in DataFrame
                 title = self.df_article_vectors.loc[most_similar_article_index]['title'].encode('utf-8')
                 title_plus_score = f"{title} ({most_similar_article_score})"
-                self.df_article_vectors.set_value(index, 'most_similar_'+str(i+1), title_plus_score)
+
+                self.df_article_vectors.at[index, 'most_similar_'+str(i+1)] = title_plus_score
 
     def calculate_similarity(self, article1, article2):
         """
@@ -336,7 +341,7 @@ class AnalyzeTMTArticles:
         """
         file_name = 'output.csv'
         try:
-            self.df_article_vectors.to_csv(file_name, encoding='utf-8', sep=',')
+            self.df_article_vectors.to_csv(CURRENT_DIRECTORY / file_name, encoding='utf-8', sep=',')
         except OSError:
             logging.warning(f"Error while trying to save output file to {file_name}!")
 

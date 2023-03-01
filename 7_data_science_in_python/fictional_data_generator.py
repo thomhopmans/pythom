@@ -1,4 +1,5 @@
 import logging
+import pathlib
 import time
 import uuid
 from datetime import datetime, timedelta
@@ -9,6 +10,7 @@ from tqdm import tqdm
 
 logging.basicConfig(level=logging.DEBUG)
 
+CURRENT_DIRECTORY = pathlib.Path(__file__).resolve().parents[0]
 N_USERS = 5000
 DATE_START = datetime(2016, 9, 1)
 
@@ -32,8 +34,8 @@ class FictionalDataGenerator:
         self.df_engagements = None
         self.engagements_mean = 20
         self.engagements_stdev = 8
-        self.path_output_sessions = 'data\\df_sessions.csv'
-        self.path_output_engagements = 'data\\df_engagements.csv'
+        self.path_output_sessions = CURRENT_DIRECTORY / 'data' / 'df_sessions.csv'
+        self.path_output_engagements = CURRENT_DIRECTORY / 'data' / 'df_engagements.csv'
 
     def run(self):
         """ Run the full script """
@@ -52,12 +54,11 @@ class FictionalDataGenerator:
 
     def extract_engagements_dataframe(self):
         condition = self.df['has_engagement'] == True
-        self.df_engagements = self.df.ix[condition]
+        self.df_engagements = self.df.loc[condition]
         relevant_columns = ['user_id', 'site_id', 'engagement_unix_timestamp', 'engagement_type', 'custom_properties']
         self.df_engagements = self.df_engagements[relevant_columns]
 
     def save_dataframes(self):
-        # self.df.set_index('user_id').to_csv('data\\df.csv', sep=',')
         self.df_sessions.set_index('user_id').to_csv(self.path_output_sessions, sep=',')
         self.df_engagements.set_index('user_id').to_csv(self.path_output_engagements, sep=';')
 
@@ -70,11 +71,11 @@ class FictionalDataGenerator:
         self.df = pd.concat(user_dataframes)
 
     def generate_random_sessions_per_user(self, uid):
-        df = pd.DataFrame()
         n_sessions = int(np.ceil(np.random.rand(1) * 10))
         session_start_date = DATE_START
         sum_pageviews = 0
 
+        dataframes = []
         for i in range(1, n_sessions+1):
             session_start_date = session_start_date + timedelta(days=int(np.ceil(np.random.rand(1) * 3)),
                                                                 hours=int(np.ceil(np.random.rand(1) * 24)),
@@ -110,9 +111,9 @@ class FictionalDataGenerator:
                 sum_pageviews = 0
 
             # Append session row to total DataFrame
-            df_row = pd.DataFrame(session_dict, index=[0])
-            df = df.append(df_row, ignore_index=True)
-        return df
+            dataframes.append(pd.DataFrame(session_dict, index=[0]))
+
+        return pd.concat(dataframes)
 
     def has_engagement_in_session(self, pageviews):
         critical_value = np.random.normal(self.engagements_mean, self.engagements_stdev)

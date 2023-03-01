@@ -1,15 +1,18 @@
+import pathlib
+
 import matplotlib.dates as dates
 import matplotlib.pyplot as plt
 import matplotlib.ticker as tkr
 import numpy as np
 import pandas as pd
-import statsmodels.formula.api as sm
 import statsmodels.tools.tools as sm_tools
+from statsmodels.regression import linear_model
 
+CURRENT_DIRECTORY = pathlib.Path(__file__).resolve().parents[0]
 
 class ExampleSCurves:
     """
-    A practical example that shows how to optimize your media spend using S-curves
+    A practical example that shows how to optimize your media spend using S-curves.
     """
 
     def __init__(self):
@@ -18,7 +21,6 @@ class ExampleSCurves:
     def run(self):
         """
         Execute
-        :return:
         """
         # self.create_fictional_dataset()
         self.load_fictional_dataset_from_article()
@@ -28,9 +30,6 @@ class ExampleSCurves:
         self.create_predicted_s_curve_plot()
         self.run_example_3()
 
-    ####################################
-    # CREATE/LOAD FICTIONAL DATASET    #
-    ####################################
     def create_fictional_dataset(self):
         # Create fictional dataset
         self.df = pd.DataFrame(0, columns=['Sales'], index=pd.date_range('20150601',periods=31, freq='D'))
@@ -44,11 +43,11 @@ class ExampleSCurves:
         # Add day of week dummies
         self.add_day_dummies()
         # Uncomment the line below if you want to save your fictional dataset
-        self.df.to_csv('dataset.csv')
+        self.df.to_csv(CURRENT_DIRECTORY / 'dataset.csv')
 
     def load_fictional_dataset_from_article(self):
         # Load earlier created fictional dataset
-        self.df = pd.read_csv(filepath_or_buffer='dataset.csv',
+        self.df = pd.read_csv(filepath_or_buffer=CURRENT_DIRECTORY / 'dataset.csv',
                               index_col=['datetime_NL'],
                               parse_dates=[0])
 
@@ -75,8 +74,6 @@ class ExampleSCurves:
     def add_radio_values(self):
         """
         Add fictional radio GRPs on specific dates
-        :param df:
-        :return:
         """
         self.df['radio_grp'] = int(0)
         self.df.ix['2015-06-01', 'radio_grp'] = 4
@@ -131,13 +128,10 @@ class ExampleSCurves:
                 column_split = column.split("_")
                 dummy_start = float(column_split[2])
                 dummy_end = float(column_split[3])
-                self.df.ix[self.df['radio_grp'] >= dummy_start, column] = int(1)
-                self.df.ix[self.df['radio_grp'] > dummy_end, column] = int(0)
 
+                self.df.loc[self.df['radio_grp'] >= dummy_start, column] = int(1)
+                self.df.loc[self.df['radio_grp'] > dummy_end, column] = int(0)
 
-    ###############################
-    # MODEL, EXAMPLES AND PLOTS   #
-    ###############################
     def create_example_s_curve_plot(self):
         # Initialize plot
         fig, ax = plt.subplots(figsize=(8, 4))
@@ -163,7 +157,8 @@ class ExampleSCurves:
             x = sm_tools.add_constant(x)        # Add constant
         if log_transform:
             y = np.log1p(y)
-        ols_model = sm.OLS(y, x)                # Initialize model
+
+        ols_model = linear_model.OLS(y, x)                # Initialize model
         ols_result = ols_model.fit()            # Fit model
         print(ols_result.summary())             # Print statistics summary
         return ols_result
