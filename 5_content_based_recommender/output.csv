@@ -1,0 +1,139 @@
+,tags_first,title,most_similar_1
+0,overview,The Marketing Technologist in 2016: the data,b'Looking back at a fantastic first year: Most read articles in 2015' (0.64)
+1,analytics,No click? Still results!,b'Improve your customer journey with data collection' (0.66)
+2,analytics,A lean approach to better recruitment insights,b'About the Google Analytics client ID' (0.86)
+3,mobile advertising,All I want for Christmas is MRAID!,b'The differences between Adobe Experience Design and Sketch App' (0.62)
+4,analytics,About the Google Analytics client ID,b'A lean approach to better recruitment insights' (0.86)
+5,code,Pause your Adwords campaigns automatically when a site is down with an Adwords script,b'A moving object in your campaign? Update Adwords accordingly every hour.' (0.76)
+6,analytics,How to check a GA account in less than 10 minutes,b'Introducing Robr rate: a metric to spot easy to sell products' (0.7)
+7,tech,Stop blaming tech for Trump,b'How close is Facebook to becoming The Circle?' (0.7)
+8,code,Personalized offline ads - Part 1: Recognizing people,b'A GHG Labs concept: The first worldwide web loyalty system' (0.73)
+9,ai,The Genie in the Bottle: How to Tame AI?,"b'Takeaways from a talk about LeSS, an evening with Bas Vodde' (0.5)"
+10,analytics,7 reasons to use Snowplow besides Google Analytics 360,"b""Overcoming cross-device challenges with Google Analytics' client ID"" (0.83)"
+11,social advertising,Pragmatic approach to get Disqus comment notifications in Slack,b'Get more out of Facebook Messenger' (0.68)
+12,analytics,Connecting offline sales to online campaign sources with Google Analytics - Part 2,b'Connecting offline sales to online campaign sources with Google Analytics - Part 1' (0.82)
+13,data science,Helping our new Data Scientists start in Python: A guide to learning by doing,b'Is there time for coffee? Your execution time is ticking in Python!' (0.74)
+14,code,Api.ai vs Wit.ai (or is it Google vs Facebook?),b'Commercial Chatbots: What does the Consumer think?' (0.88)
+15,social advertising,Commercial Chatbots: What does the Consumer think?,b'Api.ai vs Wit.ai (or is it Google vs Facebook?)' (0.88)
+16,javascript,How to set up ESLint with Airbnb JavaScript Style Guide in WebStorm,"b""How to get Airbnb's JavaScript style guide working in WebStorm"" (0.84)"
+17,analytics,Google Analytics' new event metrics explained,b'Track content performance using Google Analytics Enhanced Ecommerce report' (0.75)
+18,social advertising,Get more out of Facebook Messenger,"b""Recently used targeting in Facebook's Power Editor"" (0.71)"
+19,data science,Calculation of confidence intervals for ratios,b'Personalized offline ads - Part 1: Recognizing people' (0.66)
+20,code,How to write a basic viewability tracker,"b""Huh? Does DCM use the creative's source code for its validation?"" (0.67)"
+21,analytics,What is a tag manager?,b'One JavaScript bookmark to make checking tags easier' (0.71)
+22,code,How to start a WhatsApp conversation directly from the web,b'Passing query string parameters to a creative in Appnexus' (0.73)
+23,data science,Send Slack notifications whenever a Pokémon spawns nearby using a Pokémon GO SlackBot,"b""What I've learned by creating a bad watchface for Pebble"" (0.66)"
+24,analytics,Connecting offline sales to online campaign sources with Google Analytics - Part 1,b'About the Google Analytics client ID' (0.86)
+25,labs,"GHG Labs: ""The web loyalty system is ready to bring change to digital marketing""",b'A GHG Labs concept: The first worldwide web loyalty system' (0.89)
+26,virtual reality,VIVA VR: Introduction to using Virtual Reality for marketing (part 1),"b""Is Apple mocking Google's Alphabet announcement?"" (0.57)"
+27,facebook,Facebook's advertising tips: First look,"b""Recently used targeting in Facebook's Power Editor"" (0.8)"
+28,code,Change your website's address bar or device status bar to match your brand colors,"b""How and why to test your product's performance on a slow internet connection"" (0.7)"
+29,labs,Shopping in the future: a virtual reality experience,b'Virtual reality: connecting Unity to the CAVE' (0.82)
+30,cro,3 steps to remove all sensitive user data from Hotjar,b'Introducing Bananalytics' (0.68)
+31,conversion rate optimization,Optimizing banner ads by tracking banner interaction,b'Viewability: No Guarantee for Success' (0.75)
+32,analytics,Research: Mobile advertising increases both online and offline sales,b'Masterclass mobile? Practise what you preach!' (0.68)
+33,facebook,Recently used targeting in Facebook's Power Editor,"b""Facebook's advertising tips: First look"" (0.8)"
+34,metrics,Improve your customer journey with data collection,b'Introducing Robr rate: a metric to spot easy to sell products' (0.81)
+35,analytics,How one simple text link boosted revenue and won a WhichTestWon Award,b'Increase the reach of your TV campaign with programmatic video' (0.73)
+36,marketing,Tech revolution vs Human Evolution - a call for smarter marketing,b'Stop blaming tech for Trump' (0.68)
+37,analytics,What to look for when selecting a customer identifier,b'Multichannel problem (partly) solved with postal codes' (0.78)
+38,code,Passing data to and from a nested component in Angular 2,b'Introduction to data binding in Angular 2 versus Angular 1' (0.87)
+39,None,How and why to test your product's performance on a slow internet connection,"b""Change your website's address bar or device status bar to match your brand colors"" (0.7)"
+40,analytics,Increase the reach of your TV campaign with programmatic video,b'How one simple text link boosted revenue and won a WhichTestWon Award' (0.73)
+41,analytics,Overcoming cross-device challenges with Google Analytics' client ID,b'7 reasons to use Snowplow besides Google Analytics 360' (0.83)
+42,analytics,Making the most of Facebook's video potential,b'Everything you need to know about the new Facebook Video Insights' (0.65)
+43,analytics,How to create a random data view in Google Analytics,b'Get more out of the Google Analytics app by showing less data' (0.74)
+44,labs,A GHG Labs concept: The first worldwide web loyalty system,"b'GHG Labs: ""The web loyalty system is ready to bring change to digital marketing""' (0.89)"
+45,analytics,Multichannel problem (partly) solved with postal codes,b'What to look for when selecting a customer identifier' (0.78)
+46,data science,Upload your local Spark script to an AWS EMR cluster using a simple Python script,b'Is there time for coffee? Your execution time is ticking in Python!' (0.68)
+47,google analytics user conference gauc 2016,Recap: Google Analytics User Conference - GAUC 2016,"b""Is Apple mocking Google's Alphabet announcement?"" (0.6)"
+48,facebook,How close is Facebook to becoming The Circle?,b'Stop blaming tech for Trump' (0.7)
+49,labs,Virtual reality: connecting Unity to the CAVE,b'Shopping in the future: a virtual reality experience' (0.82)
+50,tag management,Other tag managers on the block: Qubit Opentag,b'7 reasons to use Snowplow besides Google Analytics 360' (0.65)
+51,labs,3D print marketing and best practices,b'Shopping in the future: a virtual reality experience' (0.64)
+52,None,The differences between Adobe Experience Design and Sketch App,b'Webstorm 10 improves the performance of file indexing' (0.72)
+53,tag management,Improving Optimizely's Google Tag Manager integration,"b""How to improve Visual Website Optimizer's Google Tag Manager integration"" (0.91)"
+54,data,What I’ve learned by giving a talk about data to 100 people,b'When creativity hurts data: a visualisation story' (0.76)
+55,code,Introduction to data binding in Angular 2 versus Angular 1,b'Passing data to and from a nested component in Angular 2' (0.87)
+56,facebook,Facebook marketing: 5 insights you can get out of the new Audience Overlap-tool,b'Get more out of Facebook Messenger' (0.66)
+57,facebook,Everything you need to know about the new Facebook Video Insights,"b""Recently used targeting in Facebook's Power Editor"" (0.7)"
+58,analytics,How to keep SEO rankings when changing domains,b'How to create a random data view in Google Analytics' (0.62)
+59,code,Passing query string parameters to a creative in Appnexus,b'Send users to your site after clicking on an animated GIF on Facebook' (0.74)
+60,None,Reduce the amount of sampled data in your Google Analytics Reporting API requests,"b""Overcoming cross-device challenges with Google Analytics' client ID"" (0.72)"
+61,data science,A recommendation system for blogs: Content-based similarity (part 2),b'A recommendation system for blogs: Setting up the prerequisites (part 1)' (0.56)
+62,code,Send users to your site after clicking on an animated GIF on Facebook,b'Force Express to handle all requests over HTTPS' (0.76)
+63,facebook,Instagram: get more out of your carousel ads with this simple trick [case],"b""Recently used targeting in Facebook's Power Editor"" (0.69)"
+64,usersbase,What I've learned by creating a bad watchface for Pebble,b'Send Slack notifications whenever a Pok\xc3\xa9mon spawns nearby using a Pok\xc3\xa9mon GO SlackBot' (0.66)
+65,analytics,Introducing Robr rate: a metric to spot easy to sell products,b'How article size helps you understand your content performance' (0.87)
+66,code,Create a simple toggle button using reactive programming,b'5 reasons why you need a JavaScript style guide' (0.67)
+67,overview,Looking back at a fantastic first year: Most read articles in 2015,b'5 reasons why you need a JavaScript style guide' (0.65)
+68,data,When creativity hurts data: a visualisation story,b'What I\xe2\x80\x99ve learned by giving a talk about data to 100 people' (0.76)
+69,scrum,"Takeaways from a talk about LeSS, an evening with Bas Vodde",b'Xebicon Amsterdam 2015: our notes (1/2)' (0.76)
+70,analytics,Collecting form abandonment data with Formagical and Google Analytics,"b""Google Analytics' new event metrics explained"" (0.73)"
+71,code,Smart clothing makes it feel real,b'Virtual reality: connecting Unity to the CAVE' (0.76)
+72,analytics,Five insights  on display campaigns from Facebook’s Atlas,"b""IE8 is no longer worth our client's money"" (0.78)"
+73,analytics,The CEDDL: a data layer standard that never was?,b'How to add VWO test variants to your Snowplow Analytics data' (0.6)
+74,analytics,Our first insights in the ad-blocking consumer,b'Introducing Bananalytics' (0.68)
+75,code,Creating dynamic videos using JavaScript and After Effects: the basics,b'Debugging Adobe Generator plugins for Photoshop in production' (0.76)
+76,analytics,One JavaScript bookmark to make checking tags easier,b'Introducing Bananalytics' (0.74)
+77,app,Get more out of the Google Analytics app by showing less data,b'How to create a random data view in Google Analytics' (0.74)
+78,code,A moving object in your campaign? Update Adwords accordingly every hour.,b'Caching $http requests in AngularJS' (0.79)
+79,data science,A recommendation system for blogs: Setting up the prerequisites (part 1),b'A recommendation system for blogs: Content-based similarity (part 2)' (0.56)
+80,data science,Is there time for coffee? Your execution time is ticking in Python!,b'Helping our new Data Scientists start in Python: A guide to learning by doing' (0.74)
+81,visualisation,7 things I’ve learned by attending the 2015 Data Visualisation Summit in London,b'What I\xe2\x80\x99ve learned by giving a talk about data to 100 people' (0.7)
+82,code,How to use responsive breakpoint analytics to measure design performance,"b""Using HTML5's device orientation to track device behaviour"" (0.7)"
+83,analytics,How article size helps you understand your content performance,b'Track content performance using Google Analytics Enhanced Ecommerce report' (0.92)
+84,tag management,How to improve Visual Website Optimizer's Google Tag Manager integration,"b""Improving Optimizely's Google Tag Manager integration"" (0.91)"
+85,analytics,Start using page types to make your tag management life easier,b'Improve client acquisition insights using a single line of code' (0.75)
+86,adserving,Huh? Does DCM use the creative's source code for its validation?,b'Using String.fromCharCode when encoding gets out of control' (0.69)
+87,reactjs,React Router: a comprehensive introduction,b'Catch React errors and log them to Sentry' (0.71)
+88,analytics,Improve client acquisition insights using a single line of code,b'Migrating to Google Tag Manager without changing hard coded _gaq.push() events' (0.77)
+89,analytics,Track content performance using Google Analytics Enhanced Ecommerce report,b'How article size helps you understand your content performance' (0.92)
+90,data science,Slashception with regexp_extract in Hive,b'Data collection and strange values in CSV format' (0.65)
+91,tech,Is Apple mocking Google's Alphabet announcement?,b'What I\xe2\x80\x99ve learned by giving a talk about data to 100 people' (0.62)
+92,data science,The GAM approach to spend your money more efficiently!,b'Optimizing media spends using S-response curves' (0.76)
+93,code,Building a URL validator with Amazon API Gateway,b'Google OAuth 2: access data from a Google user in your application' (0.62)
+94,code,Catch React errors and log them to Sentry,b'Caching $http requests in AngularJS' (0.83)
+95,code,Force Express to handle all requests over HTTPS,b'A moving object in your campaign? Update Adwords accordingly every hour.' (0.78)
+96,analytics,Migrating to Google Tag Manager without changing hard coded _gaq.push() events,"b""How to improve Visual Website Optimizer's Google Tag Manager integration"" (0.87)"
+97,code,Creating a SHA-2 encrypted certificate signing request for Heroku,b'How to update out of date npm dependencies' (0.73)
+98,analytics,Heap Analytics: an adhoc analysis dream come true,b'What is a tag manager?' (0.67)
+99,cro,Getting started with Sequential Messaging: the 4 main stages,b'3 conversion rate optimisation trends for 2015' (0.66)
+100,opinion,IE8 is no longer worth our client's money,b'Five insights  on display campaigns from Facebook\xe2\x80\x99s Atlas' (0.78)
+101,opinion,4 immediate improvements in our Scrum process,"b'Takeaways from a talk about LeSS, an evening with Bas Vodde' (0.65)"
+102,analytics,Setting up a cookie law compliant Google Analytics tracker,b'Bring on- and offline together with iBeacons and Google Analytics' (0.78)
+103,code,How npm 3 solves WebStorm's performance issues,b'Webstorm 10 improves the performance of file indexing' (0.76)
+104,cro,3 conversion rate optimisation trends for 2015,b'Viewability: No Guarantee for Success' (0.79)
+105,analytics,5 key takeaways from the Google Analytics User Conference in Amsterdam,b'A lean approach to better recruitment insights' (0.71)
+106,code,Google OAuth 2: access data from a Google user in your application,b'Force Express to handle all requests over HTTPS' (0.73)
+107,analytics,Export preview urls in Optimizely without starting a test,b'Passing query string parameters to a creative in Appnexus' (0.66)
+108,code,"Angular 2: Where have my factories, services, constants and values gone?",b'Caching $http requests in AngularJS' (0.77)
+109,events,Xebicon Amsterdam 2015: our notes (1/2),"b'Takeaways from a talk about LeSS, an evening with Bas Vodde' (0.76)"
+110,mobile,How we keep our mobile device lab small and simple,"b""Change your website's address bar or device status bar to match your brand colors"" (0.51)"
+111,analytics,Viewability: No Guarantee for Success,b'3 conversion rate optimisation trends for 2015' (0.79)
+112,code,How to update out of date npm dependencies,"b""How npm 3 solves WebStorm's performance issues"" (0.75)"
+113,code,5 reasons why you need a JavaScript style guide,b'Overcoming blog challenges by introducing Geek.' (0.73)
+114,marketing,Transforming an online marketing agency talk at Nextbuild: the slides,b'What I\xe2\x80\x99ve learned by giving a talk about data to 100 people' (0.6)
+115,code,Using String.fromCharCode when encoding gets out of control,b'Debugging Adobe Generator plugins for Photoshop in production' (0.78)
+116,code,How to add VWO test variants to your Snowplow Analytics data,b'Simplify iFrame tracking for Universal Analytics' (0.73)
+117,code,Debugging Adobe Generator plugins for Photoshop in production,b'Using String.fromCharCode when encoding gets out of control' (0.78)
+118,code,Fixing the T-date bug in Safari mobile,b'Caching $http requests in AngularJS' (0.71)
+119,marketing,Higher conversion rates with a shopping cart abandonment program,b'Viewability: No Guarantee for Success' (0.62)
+120,data science,Optimizing media spends using S-response curves,b'The GAM approach to spend your money more efficiently!' (0.76)
+121,code,How to get Airbnb's JavaScript style guide working in WebStorm,b'How to set up ESLint with Airbnb JavaScript Style Guide in WebStorm' (0.84)
+122,marketing,Masterclass mobile? Practise what you preach!,b'Research: Mobile advertising increases both online and offline sales' (0.68)
+123,analytics,Introducing Formagical.JS: form analytics without dashboarding,b'Collecting form abandonment data with Formagical and Google Analytics' (0.66)
+124,code,Webstorm 10 improves the performance of file indexing,"b""How npm 3 solves WebStorm's performance issues"" (0.76)"
+125,data science,Data collection and strange values in CSV format,b'Calculating ad stocks in a fast and readable way in Python' (0.81)
+126,ghostery,Introducing Bananalytics,"b""Using HTML5's device orientation to track device behaviour"" (0.77)"
+127,optimizely,Live Optimizely Variant Switcher,b'Simplify iFrame tracking for Universal Analytics' (0.78)
+128,cro,In the heat of the moment: Integrating Mouseflow with Visual Website Optimizer,b'We be clickin \xe2\x80\x99n tappin: adjusting a CTA based on device capabilities' (0.65)
+129,data science,Calculating ad stocks in a fast and readable way in Python,b'Data collection and strange values in CSV format' (0.81)
+130,angularjs,Caching $http requests in AngularJS,b'Catch React errors and log them to Sentry' (0.83)
+131,cro,We be clickin ’n tappin: adjusting a CTA based on device capabilities,"b""Thoughts on new events for Apple's new Macbook Force Touch trackpad"" (0.71)"
+132,google analytics,Simplify iFrame tracking for Universal Analytics,b'Live Optimizely Variant Switcher' (0.78)
+133,thoughts,Thoughts on new events for Apple's new Macbook Force Touch trackpad,b'We be clickin \xe2\x80\x99n tappin: adjusting a CTA based on device capabilities' (0.71)
+134,testing,Monitor your A/B tests with Optimizely and Pingdom,b'In the heat of the moment: Integrating Mouseflow with Visual Website Optimizer' (0.65)
+135,analytics,Bring on- and offline together with iBeacons and Google Analytics,b'A lean approach to better recruitment insights' (0.78)
+136,html5,Using HTML5's device orientation to track device behaviour,b'Introducing Bananalytics' (0.77)
+137,introduction,Overcoming blog challenges by introducing Geek.,b'5 reasons why you need a JavaScript style guide' (0.73)

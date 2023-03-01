@@ -1,13 +1,5 @@
-# encoding: utf-8
-"""
-Created on January 8, 2016
-@author: thom.hopmans
-"""
-import logging
 from data_processor import DataProcessor
 from model_fitter import ModelFitter
-
-logging.basicConfig(level=logging.DEBUG)
 
 
 class CollaborativeFiltering:
