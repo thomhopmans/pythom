@@ -1,10 +1,10 @@
-from .svm_2d import (
+from svm_2d import (
     get_contour,
     get_parallels,
     get_separating_hyperplane,
 )
-from .svm_3d import hyperplane_from_3d_to_2d
-from .template import go
+from svm_3d import hyperplane_from_3d_to_2d
+from template import go
 
 MARKER_COLORS = {
     "rejected": "#EA4763",
